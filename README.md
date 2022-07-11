@@ -21,7 +21,7 @@ composer require icy8/socket-io
 
 新建命令行文件：`websocket.php`
 
-在linux中运行，通常建议加上`-d`选项守护进程。
+如果在linux中运行，通常建议加上`-d`选项守护进程。
 
 ```php
 <?php
