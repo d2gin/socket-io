@@ -9,6 +9,11 @@ use Workerman\Protocols\Http\Request;
 use Workerman\Timer;
 use Workerman\Worker;
 
+/**
+ * @method Emitter on($name, $event = null, $once = false)
+ * Class Server
+ * @package icy8\SocketIO
+ */
 class Server
 {
     protected $socketio;
@@ -17,9 +22,9 @@ class Server
      */
     protected $engine;
     protected $token;
-    public    $httpHost        = "0.0.0.0:9580"; // http接口
-    public    $httpLimitIp     = '*';
-    public    $globalID        = "socketio";
+    public    $httpHost    = "0.0.0.0:9580"; // http接口
+    public    $httpLimitIp = '*';
+    public    $globalID    = "socketio";
 
     public function __construct($socket_name = '', array $opts = array())
     {
@@ -62,6 +67,15 @@ class Server
             $httpServer->onMessage = [$this, "onHttpClientMessage"];
             $httpServer->listen();
         }
+    }
+
+    /**
+     * 获取worker对象
+     * @return Worker
+     */
+    public function worker()
+    {
+        return $this->engine->worker;
     }
 
     protected function publishToClients($channel, $event, $data)
