@@ -97,7 +97,7 @@ class Server
         // 限制ip
         if (
             !in_array("*", $limitIps)
-            && ($remoteIp || !in_array($remoteIp, $limitIps))
+            && (!$remoteIp || !in_array($remoteIp, $limitIps))
         ) {
             $connection->close("HTTP/1.1 400 Bad Request\r\n\r\nBad Request", true);
             return;
