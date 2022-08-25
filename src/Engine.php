@@ -33,21 +33,35 @@ class Engine
         $this->event        = new Emitter();
     }
 
+    /**
+     * 加入房间/频道
+     * @param $room
+     * @param $id
+     * @param bool $data
+     * @return $this
+     */
     public function join($room, $id, $data = true)
     {
-        if (!isset($this->rooms[$id])) {
+        // 同一个客户端只能加入一次
+        if (!isset($this->rooms[$room][$id])) {
             $this->rooms[$room][$id] = $data;
         }
         return $this;
     }
 
+    /**
+     * 退出房间
+     * @param $room
+     * @param null $id
+     * @return $this
+     */
     public function leave($room, $id = null)
     {
         if (!isset($this->rooms[$room])) {
             return $this;
-        } else if ($id) {
+        } else if ($id) {// 注销某个客户端
             unset($this->rooms[$room][$id]);
-        } else {
+        } else {// 注销房间所有客户端
             unset($this->rooms[$room]);
         }
         return $this;
