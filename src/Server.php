@@ -10,7 +10,10 @@ use Workerman\Timer;
 use Workerman\Worker;
 
 /**
- * @method Emitter on($name, $event = null, $once = false)
+ * @method Emitter on($event_name, $listener)
+ * @method Emitter once($event_name, $listener)
+ * @method Engine to($room)
+ * @method Array|Socket fetchRooms($room, $id = null)
  * Class Server
  * @package icy8\SocketIO
  */

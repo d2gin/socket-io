@@ -83,6 +83,20 @@ class Engine
         return $this;
     }
 
+    /**
+     * 获取组员客户端
+     * @param $room
+     * @param null $id
+     * @return mixed
+     */
+    public function fetchRooms($room, $id = null)
+    {
+        if ($id) {
+            return $this->rooms[$room][$id];
+        }
+        return $this->rooms[$room];
+    }
+    
     public function broadcast()
     {
         $this->to(array_keys($this->rooms));
