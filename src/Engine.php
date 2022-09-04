@@ -92,9 +92,9 @@ class Engine
     public function fetchRooms($room, $id = null)
     {
         if ($id) {
-            return $this->rooms[$room][$id];
+            return $this->rooms[$room][$id] ?? null;
         }
-        return $this->rooms[$room];
+        return $this->rooms[$room] ?? [];
     }
 
     public function broadcast()
