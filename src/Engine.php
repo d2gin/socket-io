@@ -96,7 +96,7 @@ class Engine
         }
         return $this->rooms[$room];
     }
-    
+
     public function broadcast()
     {
         $this->to(array_keys($this->rooms));
@@ -210,19 +210,6 @@ class Engine
     }
 
     /**
-     * 取消订阅
-     * @param $data
-     */
-    protected function handleUnSubcribe($data)
-    {
-        $channel = $data['channel'] ?? '';
-        if ($channel && isset($this->clients[$channel])) {
-            $this->leave($channel, $this->clients[$channel]->id);
-            $this->event->emit("unsubcribe", $channel);
-        }
-    }
-
-    /**
      * @param Socket $socket
      * @return \Closure
      */
@@ -263,7 +250,7 @@ class Engine
 
         $connection->onMessage = $this->handleMessage($socket);
         $socket->on("subcribe", $this->handleSubcribe($socket));
-        $socket->on("unsubcribe", [$this, "handleUnSubcribe"]);
+        $socket->on("unsubcribe", $this->handleDisconnect($socket));
         $socket->on("disconnect", $this->handleDisconnect($socket));
         $socket->onOpen();
         $this->event->emit("connection", $socket);
