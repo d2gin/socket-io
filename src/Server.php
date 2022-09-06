@@ -13,6 +13,7 @@ use Workerman\Worker;
  * @method Emitter on($event_name, $listener)
  * @method Emitter once($event_name, $listener)
  * @method Engine to($room)
+ * @method Engine leave($room, $id = null)
  * @method Array|Socket fetchRooms($room, $id = null)
  * Class Server
  * @package icy8\SocketIO

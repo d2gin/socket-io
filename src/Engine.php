@@ -202,7 +202,7 @@ class Engine
             if ($channel) {
                 $this->join($channel, $socket->id, $data);
                 $socket->emit("subcribe_success", $channel, $data);
-                $this->event->emit("subcribe", $channel, $data);
+                $this->event->emit("subcribe", $socket, $channel, $data);
             } else {
                 $socket->emit("subcribe_error", ['channel' => $channel, 'data' => $data, 'reason' => "Channel cannot be empty."]);
             }
@@ -230,7 +230,7 @@ class Engine
                 foreach ($members as $socketid => $data) {
                     if ($socketid === $socket->id) {
                         $this->leave($room, $socketid);
-                        $this->event->emit("unsubcribe", $room, $data);
+                        $this->event->emit("unsubcribe", $socket, $room, $data);
                     }
                 }
             }
