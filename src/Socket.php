@@ -203,7 +203,7 @@ class Socket
         if ($this->pingTimeoutTimer) {
             Timer::del($this->pingTimeoutTimer);
         }
-        $this->push(Packet::create(Packet::DISCONNECT, ['data' => $reason]));
+        $this->push(Packet::create(Packet::DISCONNECT));
         $this->event->emit("disconnect", $reason);
         $this->event->emit("close", $reason);
         $this->client->close();
