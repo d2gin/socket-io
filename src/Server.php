@@ -37,16 +37,10 @@ class Server
         unset($opts['ping_interval'], $opts['ping_timeout'], $opts['token']);
         // websocket
         $worker = new Worker($socket_name, $opts);
-        $this->attach($worker);
-    }
-
-    protected function attach(Worker $worker)
-    {
+        // 事件
         $this->engine->on("workerStart", [$this, "onStart"]);
         $this->engine->on("connection", [$this, "onConnection"]);
         $this->engine->attach($worker);
-        $worker->onWorkerStart = [$this, "onStart"];
-        return $this;
     }
 
     public function onConnection(Socket $socket)

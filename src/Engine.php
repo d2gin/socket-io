@@ -154,7 +154,7 @@ class Engine
      */
     public function handleWorkerStart()
     {
-        return call_user_func_array([$this, "emit"], ["workerStart"] + func_get_args());
+        return call_user_func_array([$this->event, 'emit'], ['workerStart'] + func_get_args());
     }
 
     /**
@@ -163,7 +163,7 @@ class Engine
      */
     public function handleWorkerStop()
     {
-        return call_user_func_array([$this, "emit"], ["workerStop"] + func_get_args());
+        return call_user_func_array([$this->event, 'emit'], ['workerStop'] + func_get_args());
     }
 
     /**
