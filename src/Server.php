@@ -132,11 +132,19 @@ class Server
                 // 不要保持连接，响应了马上关闭
                 $connection->close($header . "{}", true);
                 break;
-            // 广播事件
-            case "broadcast":
+            // 对所有订阅客户端广播
+            case "broadcast_room":
                 $event = $post['event'] ?? '';
                 $data  = $post['data'] ?? '';
                 $this->engine->broadcast()->emit($event, $data);
+                // 不要保持连接，响应了马上关闭
+                $connection->close($header . "{}", true);
+                break;
+            // 对所有客户端广播
+            case "broadcast":
+                $event = $post['event'] ?? '';
+                $data  = $post['data'] ?? '';
+                $this->engine->emit($event, $data);
                 // 不要保持连接，响应了马上关闭
                 $connection->close($header . "{}", true);
                 break;
