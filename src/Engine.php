@@ -131,6 +131,7 @@ class Engine
                     call_user_func_array([$socket, "emit"], $args);
                 }
             }
+            $this->to = [];
         } else {
             foreach ($this->clients as $socket) {
                 call_user_func_array([$socket, "emit"], $args);
